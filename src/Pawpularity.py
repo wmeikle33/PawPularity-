@@ -5,14 +5,8 @@ import matplotlib.pylab as plt
 import os
 import PIL
 from PIL import UnidentifiedImageError
+from sklearn.model_selection import StratifiedShuffleSplit
 pd.options.mode.chained_assignment = None
-
-print('TensorFlow version: {}'.format(tf.__version__))
-device_name = tf.test.gpu_device_name()
-if device_name != '/device:GPU:0':
-    print('GPU device not found - On for CPU time!')
-else:
-    print('Found GPU at {}'.format(device_name))
 
 
 def read_and_decode(filename, reshape_dims):
@@ -41,8 +35,6 @@ num_rows = 162
 num_cols = 2
 data = [[None] * num_cols] * num_rows  # Create a list of lists with None values
 newdf = pd.DataFrame(data, columns = ['Id', 'Weight'])
-
-from sklearn.model_selection import StratifiedShuffleSplit
 
 data_path = '/Users/wmeikle/Downloads/petfinder-pawpularity-score/'
 data = pd.read_csv(data_path+'train.csv')
